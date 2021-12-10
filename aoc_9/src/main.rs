@@ -157,7 +157,7 @@ mod tests {
     }
 
     #[bench]
-    fn bench_day_8(b: &mut Bencher) {
+    fn bench_day_9(b: &mut Bencher) {
         let input_matrix = read_file(String::from("src/input"));
 
         b.iter(|| oac_9(&input_matrix));
