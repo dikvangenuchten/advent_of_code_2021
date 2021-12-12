@@ -269,13 +269,25 @@ SM-uq",
     #[bench]
     fn bench_day_12_part_1(b: &mut Bencher) {
         let input = String::from(
-            "start-A
-start-b
-A-c
-A-b
-b-d
-A-end
-b-end",
+            "lg-GW
+pt-start
+pt-uq
+nx-lg
+ve-GW
+start-nx
+GW-start
+GW-nx
+pt-SM
+sx-GW
+lg-end
+nx-SM
+lg-SM
+pt-nx
+end-ve
+ve-SM
+TG-uq
+end-SM
+SM-uq"
         );
         b.iter(|| find_paths(&input, recursion_criteria_part_1))
     }
@@ -283,13 +295,25 @@ b-end",
     #[bench]
     fn bench_day_12_part_2(b: &mut Bencher) {
         let input = String::from(
-            "start-A
-start-b
-A-c
-A-b
-b-d
-A-end
-b-end",
+            "lg-GW
+pt-start
+pt-uq
+nx-lg
+ve-GW
+start-nx
+GW-start
+GW-nx
+pt-SM
+sx-GW
+lg-end
+nx-SM
+lg-SM
+pt-nx
+end-ve
+ve-SM
+TG-uq
+end-SM
+SM-uq"
         );
         b.iter(|| find_paths(&input, recursion_criteria_part_2))
     }
