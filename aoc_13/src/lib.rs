@@ -1,4 +1,3 @@
-#![feature(test)]
 use std::cmp::max;
 use std::collections::HashSet;
 use std::fs::File;
@@ -110,8 +109,6 @@ pub fn visualize_dots(coordinates: &HashSet<(u32, u32)>) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    extern crate test;
-    use test::Bencher;
 
     #[test]
     fn example_input() {
