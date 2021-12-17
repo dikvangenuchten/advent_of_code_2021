@@ -1,0 +1,14 @@
+[package]
+name = "all_sequantial"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+aoc_13 = { path = "../aoc_13" }
+aoc_14 = { path = "../aoc_14" }
+aoc_15 = { path = "../aoc_15" }
+aoc_16 = { path = "../aoc_16" }
+aoc_17 = { path = "../aoc_17" }
+

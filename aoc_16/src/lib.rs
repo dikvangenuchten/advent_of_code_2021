@@ -26,6 +26,10 @@ pub fn read_file(file: &str) -> String {
     return contents;
 }
 
+pub fn aoc_16_comp(input: &str) -> (u64, u64) {
+    return aoc_16(input);
+}
+
 pub fn aoc_16(message_str: &str) -> (u64, u64) {
     let packets = decode_str(message_str);
     return (count_versions(&packets), calc_value(&packets));

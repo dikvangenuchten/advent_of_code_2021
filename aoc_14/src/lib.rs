@@ -4,9 +4,29 @@ use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufReader, Read};
 
+pub fn aoc_14_comp(input: &str) -> (u64, u64) {
+    return (aoc_14_no_read(input, 10), aoc_14_no_read(input, 40));
+}
+
 pub fn aoc_14(file_input: &str, iterations: u8) -> u64 {
     let input = read_file(file_input);
 
+    let (template_str, conversions) = parse_input_v2(&input);
+
+    let mut whole_polymer = parse_template_v2(&template_str);
+
+    for _ in 0..iterations {
+        whole_polymer = react_v2(whole_polymer, &conversions);
+    }
+
+    return diff(
+        frequency_v2(&whole_polymer)
+            .iter()
+            .minmax_by(|(_, count_1), (_, count_2)| count_1.cmp(count_2)),
+    );
+}
+
+pub fn aoc_14_no_read(input: &str, iterations: u8) -> u64 {
     let (template_str, conversions) = parse_input_v2(&input);
 
     let mut whole_polymer = parse_template_v2(&template_str);

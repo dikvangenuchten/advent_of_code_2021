@@ -50,6 +50,10 @@ impl FromStr for Fold {
     }
 }
 
+pub fn aoc_13_comp(input: &str) {
+    aoc_13(input, true);
+}
+
 pub fn aoc_13(input: &str, visualize: bool) -> HashSet<(u32, u32)> {
     let (mut coordinates, folds) = parse_inputs(input);
 

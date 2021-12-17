@@ -3,6 +3,11 @@ use std::cmp::max;
 
 const GRID: ((i32, i32), (i32, i32)) = ((-100, 500), (-100, 500));
 
+pub fn aoc_17_comp(input: &str) -> (i32, u32) {
+    let input = input.trim_end();
+    return aoc_17(input, None);
+}
+
 pub fn aoc_17(input: &str, grid: Option<((i32, i32), (i32, i32))>) -> (i32, u32) {
     let target = parse_input_str(input);
     let all_locs = grid_search_smart_mt(grid, &target);

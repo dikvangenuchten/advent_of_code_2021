@@ -4,6 +4,35 @@ use std::collections::BinaryHeap;
 use std::fs::File;
 use std::io::{BufReader, Read};
 
+pub fn read_file(file: &str) -> Vec<Vec<u16>> {
+    let input = File::open(file).unwrap();
+
+    let mut contents = String::new();
+    BufReader::new(input).read_to_string(&mut contents).unwrap();
+
+    return read_from_str(&contents);
+}
+
+pub fn aoc_15_comp(input: &str) -> (u16, u16) {
+    let vec_map = read_from_str(input);
+    let map_part_1 = Map::new(vec_map.clone(), 1);
+    let part_1 = calculate_path_cost(map_part_1).unwrap();
+    let map_part_2 = Map::new(vec_map.clone(), 5);
+    let part_2 = calculate_path_cost(map_part_2).unwrap();
+    return (part_1, part_2);
+}
+
+fn read_from_str(input: &str) -> Vec<Vec<u16>> {
+    return input
+        .lines()
+        .map(|line| {
+            line.chars()
+                .map(|c| c.to_digit(10).unwrap() as u16)
+                .collect()
+        })
+        .collect();
+}
+
 pub fn aoc_15(file: &str, multiplier: u16) -> u16 {
     let input = read_file(file);
     let map_part_1 = Map::new(input, multiplier);
@@ -50,22 +79,6 @@ impl Map {
             (self.risk_map[0].len() as u16 * self.multiplier) - 1,
         );
     }
-}
-
-pub fn read_file(file: &str) -> Vec<Vec<u16>> {
-    let input = File::open(file).unwrap();
-
-    let mut contents = String::new();
-    BufReader::new(input).read_to_string(&mut contents).unwrap();
-
-    return contents
-        .lines()
-        .map(|line| {
-            line.chars()
-                .map(|c| c.to_digit(10).unwrap() as u16)
-                .collect()
-        })
-        .collect();
 }
 
 pub fn calculate_path_cost(matrix: Map) -> Option<u16> {
