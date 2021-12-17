@@ -148,6 +148,7 @@ fn construct_operator_0(
     // Not completly sure why...
     let sub_message = message_bits.take(length).collect::<String>();
     let mut sub_message_bits = sub_message.chars().peekable();
+    // let mut sub_message_bits = message_bits.take(length).peekable();
     let mut sub_packets: Vec<Packet> = vec![];
 
     while sub_message_bits.peek().is_some() {
