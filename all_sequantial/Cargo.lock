@@ -6,12 +6,17 @@ version = 3
 name = "all_sequantial"
 version = "0.1.0"
 dependencies = [
+ "aoc_12",
  "aoc_13",
  "aoc_14",
  "aoc_15",
  "aoc_16",
  "aoc_17",
 ]
+
+[[package]]
+name = "aoc_12"
+version = "0.1.0"
 
 [[package]]
 name = "aoc_13"

@@ -1,44 +1,18 @@
 #![feature(test)]
 use std::collections::{HashMap, HashSet};
 
-fn main() {
-    println!("Hello, world!");
-
-    let input = String::from(
-        "lg-GW
-pt-start
-pt-uq
-nx-lg
-ve-GW
-start-nx
-GW-start
-GW-nx
-pt-SM
-sx-GW
-lg-end
-nx-SM
-lg-SM
-pt-nx
-end-ve
-ve-SM
-TG-uq
-end-SM
-SM-uq",
-    );
-
+pub fn aoc_12_comp(input: &str) -> (usize, usize) {
+    let input = String::from(input);
     let paths_1 = find_paths(&input, recursion_criteria_part_1);
     let paths_2 = find_paths(&input, recursion_criteria_part_2);
-
-    println!("n_paths part 1: {:?}", paths_1.len());
-    println!("n_paths part 2: {:?}", paths_2.len());
+    return (paths_1.len(), paths_2.len());
 }
 
-fn find_paths(
+pub fn find_paths(
     input: &String,
     criterion: fn(&String, &Vec<String>) -> bool,
 ) -> HashSet<Vec<String>> {
     let connections = create_connections(input);
-    println!("connections: {:?}", connections);
     let paths = search_paths_recursive(vec![String::from("start")], &connections, criterion);
 
     return paths;
@@ -287,7 +261,7 @@ end-ve
 ve-SM
 TG-uq
 end-SM
-SM-uq"
+SM-uq",
         );
         b.iter(|| find_paths(&input, recursion_criteria_part_1))
     }
@@ -313,7 +287,7 @@ end-ve
 ve-SM
 TG-uq
 end-SM
-SM-uq"
+SM-uq",
         );
         b.iter(|| find_paths(&input, recursion_criteria_part_2))
     }
