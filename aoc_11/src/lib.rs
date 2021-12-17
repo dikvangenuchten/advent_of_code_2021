@@ -3,27 +3,32 @@
 #![feature(destructuring_assignment)]
 use std::collections::{BTreeSet, HashSet};
 
-fn main() {
-    println!("Hello, world!");
-    let input = vec![
-        vec![7, 7, 7, 7, 8, 3, 8, 3, 5, 3],
-        vec![2, 2, 1, 7, 2, 7, 2, 4, 7, 8],
-        vec![3, 3, 5, 5, 3, 1, 8, 6, 4, 5],
-        vec![2, 2, 4, 2, 6, 1, 8, 1, 1, 3],
-        vec![7, 1, 8, 2, 4, 6, 8, 6, 6, 6],
-        vec![5, 4, 4, 1, 6, 4, 1, 1, 1, 1],
-        vec![4, 7, 7, 3, 8, 6, 2, 3, 6, 4],
-        vec![5, 7, 1, 7, 1, 2, 5, 5, 2, 1],
-        vec![7, 5, 4, 2, 1, 2, 7, 7, 2, 1],
-        vec![4, 5, 7, 6, 6, 7, 8, 3, 4, 1],
-    ];
+use std::fs::File;
+use std::io::{BufReader, Read};
+pub fn read_file(file: String) -> String {
+    let input = File::open(file).unwrap();
+
+    let mut contents = String::new();
+    BufReader::new(input).read_to_string(&mut contents).unwrap();
+
+    return contents;
+}
+
+pub fn aoc_11_comp(input: &str) -> (u32, u32) {
+    let input: Vec<Vec<u8>> = input
+        .lines()
+        .map(|line| {
+            line.chars()
+                .map(|c| c.to_digit(10).unwrap() as u8)
+                .collect()
+        })
+        .collect();
 
     let flashes = steps(input.clone(), 100);
 
     let steps_until_all = steps_until_all_flash(input);
 
-    println!("Part 1: {flashes}");
-    println!("Part 2: {steps_until_all}")
+    return (flashes, steps_until_all);
 }
 
 fn steps(mut population: Vec<Vec<u8>>, n_steps: u32) -> u32 {
