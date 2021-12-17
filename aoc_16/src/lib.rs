@@ -41,7 +41,12 @@ pub fn aoc_16_part_2(message_str: &str) -> u64 {
     return calc_value(&packets);
 }
 
-fn count_versions(packet: &Packet) -> u64 {
+pub fn decode_str(message_str: &str) -> Packet {
+    let mut bits = message_str.chars().flat_map(|c| to_bits(c));
+    return decode_bits(&mut bits);
+}
+
+pub fn count_versions(packet: &Packet) -> u64 {
     let mut sum: u64 = packet.version as u64;
     match &packet.message {
         Message::LiretalValue { value: _ } => (),
@@ -55,7 +60,7 @@ fn count_versions(packet: &Packet) -> u64 {
     return sum;
 }
 
-fn calc_value(packet: &Packet) -> u64 {
+pub fn calc_value(packet: &Packet) -> u64 {
     let value = match &packet.message {
         Message::LiretalValue { value } => *value as u64,
         Message::Operator { sub_packets } => match &packet.type_id {
@@ -101,13 +106,10 @@ fn to_bits(letter: char) -> [char; 4] {
         'D' => ['1', '1', '0', '1'],
         'E' => ['1', '1', '1', '0'],
         'F' => ['1', '1', '1', '1'],
-        _ => panic!(),
+        letter => {
+            panic!("Unexpected input value: {:?}", letter)
+        }
     };
-}
-
-fn decode_str(message_str: &str) -> Packet {
-    let mut bits = message_str.chars().flat_map(|c| to_bits(c));
-    return decode_bits(&mut bits);
 }
 
 fn decode_to_value(message_bits: impl Iterator<Item = char>) -> u64 {
@@ -142,14 +144,13 @@ fn construct_operator_0(
 ) -> Packet {
     let length = decode_to_value((message_bits).take(15)) as usize;
 
-    let mut sub_message = message_bits.take(length).collect::<String>();
+    // Need to consume the iterator here otherwise an recursion error occurs.
+    // Not completly sure why...
+    let sub_message = message_bits.take(length).collect::<String>();
     let mut sub_message_bits = sub_message.chars().peekable();
     let mut sub_packets: Vec<Packet> = vec![];
 
     while sub_message_bits.peek().is_some() {
-        sub_message = sub_message_bits.take(length).collect::<String>();
-        sub_message_bits = sub_message.chars().peekable();
-
         let sub_version = decode_to_value((&mut sub_message_bits).take(3)) as u8;
         let sub_type_id = decode_to_value((&mut sub_message_bits).take(3)) as u8;
 
