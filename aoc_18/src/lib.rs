@@ -8,6 +8,10 @@ pub fn parse_input_str(input: &str) -> Vec<SnailFishNumber> {
         .collect();
 }
 
+pub fn aoc_18_comp(input: &str) -> (u32, u32) {
+    return (aoc_18_part_1(input), aoc_18_part_2(input));
+}
+
 pub fn aoc_18_part_1(input: &str) -> u32 {
     let numbers = parse_input_str(input);
 
