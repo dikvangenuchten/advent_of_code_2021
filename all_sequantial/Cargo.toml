@@ -16,6 +16,4 @@ aoc_17 = { path = "../aoc_17" }
 aoc_18 = { path = "../aoc_18" }
 aoc_19 = { path = "../aoc_19" }
 aoc_20 = { path = "../aoc_20" }
-
-
-
+aoc_21 = { path = "../aoc_21" }
